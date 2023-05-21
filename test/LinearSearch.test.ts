@@ -1,4 +1,4 @@
-import { LinearSearch } from "../src/LinearSearch";
+import { LinearSearch } from "../src/Algorithms/Searching/LinearSearch";
 
 describe("test add function", () => {
   it("should return true for LinearSearch([2, 3, 4, 4, 5], 5)", () => {
