@@ -10,7 +10,11 @@ describe("should compare two arrays and return true when the second array has va
   it("CompareArrays([1, 2, 1], [1, 4, 4]) should return false", () => {
     expect(CompareArrays([1, 2, 1], [1, 4, 4])).toBe(false);
   })
-  it("CompareArrays([1, 2, 1], [1, 1, 4]) should return false", () => {
+  it("CompareArrays([1, 2, 1], [1, 1, 4]) should return true", () => {
     expect(CompareArrays([1, 2, 1], [1, 1, 4])).toBe(true);
+  })
+  it("CompareArrays([1, 1, 1], [1, 1, 4]) should return false", () => {
+    expect(CompareArrays([1, 1, 1], [1, 1, 4])).toBe(false);
+
   })
 })
