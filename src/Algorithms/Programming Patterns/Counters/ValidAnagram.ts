@@ -6,10 +6,8 @@ export function ValidAnagram(str1: string, str2: string): boolean {
   }
   for (let char of str2) {
     if (!counter[char]) return false;
-    --counter[char]
+    --counter[char];
   }
-  for (let key in counter) {
-    if (counter[key] !== 0) return false
-  }
+
   return true;
 }
