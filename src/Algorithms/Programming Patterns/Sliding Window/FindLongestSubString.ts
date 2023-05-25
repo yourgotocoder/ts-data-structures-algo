@@ -1,14 +1,14 @@
 export function FindLongestSubString(str: string): number {
-  let start = 0;
+  let tracker = 0;
   let seen: { [key: string]: number } = {};
   let longestSubString = 0;
-  for (let tracker = 0; tracker < str.length; tracker++) {
-    const char = str[tracker];
+  for (let index = 0; index < str.length; index++) {
+    const char = str[index];
     if (seen[char]) {
-      start = Math.max(start, seen[char]);
+      tracker = Math.max(tracker, seen[char]);
     }
-    longestSubString = Math.max(longestSubString, tracker - start + 1);
-    seen[char] = tracker + 1;
+    longestSubString = Math.max(longestSubString, index - tracker + 1);
+    seen[char] = index + 1;
   }
   return longestSubString;
 }
