@@ -1,5 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
+  testEnvironmentOptions: {
+    NODE_OPTIONS: "--stack-size=8000",
+  },
 };

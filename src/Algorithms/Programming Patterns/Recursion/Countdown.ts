@@ -1,10 +1,7 @@
-export function Countdown(start: number): void {
+export function Countdown(start: number): number[] {
   if (start === 0) {
-    return;
+    return [];
   }
-  console.log(start);
-  start--;
-  Countdown(start);
+  let arr = [start];
+  return arr.concat(Countdown(--start));
 }
-
-Countdown(5);
