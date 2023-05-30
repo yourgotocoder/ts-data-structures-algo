@@ -1,7 +1,12 @@
 export function InsertionSort(arr: number[]): number[] {
-  let sortedArray = new Array<number>(arr.length);
-  sortedArray[0] = arr[0];
-  console.log(sortedArray);
+  for (let index = 1; index < arr.length; index++) {
+    let current = arr[index];
+    let sortedArrayIndex = index - 1;
+    while (sortedArrayIndex >= 0 && arr[sortedArrayIndex] > current) {
+      arr[sortedArrayIndex + 1] = arr[sortedArrayIndex];
+      sortedArrayIndex--;
+    }
+    arr[sortedArrayIndex + 1] = current;
+  }
   return arr;
 }
-console.log(InsertionSort([1, 2, 3, 4, 5]));
