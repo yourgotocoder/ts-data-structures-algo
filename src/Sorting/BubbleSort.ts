@@ -5,7 +5,6 @@ export function BubbleSort(arr: number[]): number[] {
     arr[index2] = temp;
   };
   let noSwaps = true;
-  let numberOfComparisions = 0;
   for (let outerIndex = arr.length - 1; outerIndex > 0; outerIndex--) {
     noSwaps = true;
     for (let innerIndex = 0; innerIndex < outerIndex; innerIndex++) {
@@ -13,11 +12,9 @@ export function BubbleSort(arr: number[]): number[] {
         swap(innerIndex, innerIndex + 1);
         noSwaps = false;
       }
-      ++numberOfComparisions;
     }
     if (noSwaps) break;
   }
-  console.log(numberOfComparisions);
   return arr;
 }
 
