@@ -5,11 +5,11 @@ export function BubbleSort(arr: number[]): number[] {
     arr[index2] = temp;
   };
   let noSwaps = true;
-  for (let outerIndex = arr.length - 1; outerIndex > 0; outerIndex--) {
+  for (let slowPointer = arr.length - 1; slowPointer > 0; slowPointer--) {
     noSwaps = true;
-    for (let innerIndex = 0; innerIndex < outerIndex; innerIndex++) {
-      if (arr[innerIndex] > arr[innerIndex + 1]) {
-        swap(innerIndex, innerIndex + 1);
+    for (let fastPointer = 0; fastPointer < slowPointer; fastPointer++) {
+      if (arr[fastPointer] > arr[fastPointer + 1]) {
+        swap(fastPointer, fastPointer + 1);
         noSwaps = false;
       }
     }
