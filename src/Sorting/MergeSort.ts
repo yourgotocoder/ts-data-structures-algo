@@ -23,4 +23,10 @@ export function merge(arr1: number[], arr2: number[]): number[] {
   return newArray;
 }
 
-console.log(merge([1, 2, 3], [3, 5, 6]));
+export function mergeSort(arr: number[]): number[] {
+  if (arr.length <= 1) return arr;
+  let middle = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, middle));
+  let right = mergeSort(arr.slice(middle));
+  return merge(left, right);
+}
