@@ -18,7 +18,7 @@ export function PivotFinder(
 ): number {
   const pivot = arr[startIndex];
   let pivotIndex = startIndex;
-  while (startIndex + 1 < endIndex) {
+  while (startIndex < endIndex) {
     if (arr[startIndex + 1] < pivot) {
       [arr[pivotIndex], arr[startIndex + 1]] = [
         arr[startIndex + 1],
