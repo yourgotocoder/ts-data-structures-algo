@@ -1,14 +1,25 @@
-export function QuickSort() {}
+export function QuickSort(
+  arr: number[],
+  left = 0,
+  right = arr.length - 1
+): number[] {
+  if (left < right) {
+    let pivotIndex = PivotFinder(arr, left, right);
+    QuickSort(arr, left, pivotIndex - 1);
+    QuickSort(arr, pivotIndex + 1, right);
+  }
+  return arr;
+}
 
 export function PivotFinder(
   arr: number[],
   startIndex: number = 0,
   endIndex: number = arr.length - 1
 ): number {
-  const current = arr[0];
-  let pivotIndex = 0;
-  while (startIndex < endIndex) {
-    if (arr[startIndex + 1] < current) {
+  const pivot = arr[startIndex];
+  let pivotIndex = startIndex;
+  while (startIndex + 1 < endIndex) {
+    if (arr[startIndex + 1] < pivot) {
       [arr[pivotIndex], arr[startIndex + 1]] = [
         arr[startIndex + 1],
         arr[pivotIndex],
@@ -17,7 +28,8 @@ export function PivotFinder(
     }
     startIndex++;
   }
-  arr[pivotIndex] = current;
+  arr[pivotIndex] = pivot;
   return pivotIndex;
 }
-console.log(PivotFinder([5, 3, 2, 1, 6, 7, 8]));
+
+console.log(QuickSort([3, 1, 2, 5, 6, 86776, 34, 3434, 324, 654]));
