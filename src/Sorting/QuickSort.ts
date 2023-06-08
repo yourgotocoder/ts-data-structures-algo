@@ -32,4 +32,3 @@ export function PivotFinder(
   return pivotIndex;
 }
 
-console.log(QuickSort([3, 1, 2, 5, 6, 86776, 34, 3434, 324, 654]));
