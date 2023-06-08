@@ -12,4 +12,11 @@ function digitCount(num: number): number {
   return digits;
 }
 
-console.log(digitCount(1000));
+function mostDigits(numArr: number[]): number {
+  let maxDigits = 0;
+  for (let num of numArr) {
+    if (digitCount(num) > maxDigits) maxDigits = digitCount(num);
+  }
+  return maxDigits;
+}
+console.log(mostDigits([32, 123, 2, 3234, 23245, 123125]));
