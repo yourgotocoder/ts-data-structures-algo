@@ -17,18 +17,40 @@ class LinkedList<T> {
     this.length = 0;
   }
 
-  push(val: T): boolean {
+  push(val: T): LinkedList<T> {
     const newNode = new ListNode(val);
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
-    } else {
-      const prevNode = this.tail;
+    } else if (this.tail) {
+      this.tail.next = newNode;
       this.tail = newNode;
-      if (prevNode) prevNode.next = newNode;
     }
     this.length++;
-    return true;
+    return this;
+  }
+
+  pop(): ListNode<T> | null {
+    if (this.length === 0) return null;
+    if (this.length === 1) {
+      const poppedNode = this.head;
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return poppedNode;
+    }
+    let prevNode = this.head;
+    while (prevNode) {
+      if (prevNode.next === this.tail) {
+        const lastNode = this.tail;
+        prevNode.next = null;
+        this.tail === prevNode;
+        this.length--;
+        return lastNode;
+      }
+      prevNode = prevNode.next;
+    }
+    return null;
   }
 
   printList(): void {
@@ -37,16 +59,17 @@ class LinkedList<T> {
       console.log("List empty");
       return;
     }
-    do {
+    while (current) {
       console.log(current.value);
       current = current.next;
-    } while (current);
+    }
   }
 }
 
 const list = new LinkedList();
 list.push(2);
 list.push(3);
-list.push(4);
-list.push(5);
+// list.push(4);
+// list.push(5);
+list.pop();
 list.printList();
