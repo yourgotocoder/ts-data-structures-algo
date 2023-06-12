@@ -45,5 +45,3 @@ function mostDigits(numArr: number[]): number {
   );
   return maxDigits;
 }
-
-console.log(RadixSort([23, 123, 12, 123213, 11555, 47457]));
