@@ -113,6 +113,36 @@ class LinkedList<T> {
     return this;
   }
 
+  remove(index: number): ListNode<T> | null {
+    if (index < 0 || index > this.length) {
+      return null;
+    } else if (index === 0) {
+      return this.shift();
+    } else if (index === this.length - 1) {
+      return this.pop();
+    } else {
+      let prevNode = this.get(index - 1);
+      let deletedNode = prevNode && prevNode.next;
+      prevNode && prevNode.next && (prevNode.next = prevNode.next.next);
+      this.length++;
+      return deletedNode;
+    }
+  }
+
+  reverse(): void {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let nextNode: ListNode<T> | null = null;
+    let prevNode: ListNode<T> | null = null;
+    while (node) {
+      nextNode = node.next;
+      node.next = prevNode;
+      prevNode = node;
+      node = nextNode;
+    }
+  }
+
   printList(): void {
     let current = this.head;
     if (current === null) {
@@ -127,12 +157,11 @@ class LinkedList<T> {
 }
 
 const list = new LinkedList();
+list.push(1);
 list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-list.unshift(1);
-console.log(list.get(2));
-console.log(list.set(2, 7));
-list.insert(5, 8);
+list.printList();
+list.reverse();
 list.printList();
