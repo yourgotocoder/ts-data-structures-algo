@@ -30,6 +30,19 @@ class LinkedList<T> {
     return this;
   }
 
+  unshift(val: T): LinkedList<T> {
+    const newNode = new ListNode(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else if (this.head) {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+
   pop(): ListNode<T> | null {
     if (this.length === 0) return null;
     if (this.length === 1) {
@@ -53,6 +66,23 @@ class LinkedList<T> {
     return null;
   }
 
+  shift(): ListNode<T> | null {
+    if (!this.head) return null;
+    const oldHead = this.head;
+    this.head = oldHead.next;
+    this.length--;
+    return oldHead;
+  }
+
+  get(index: number): ListNode<T> | null {
+    if (index < 0 || index >= this.length) return null;
+    let currentNode = this.head;
+    for (let i = 0; i < index; i++) {
+      currentNode && (currentNode = currentNode.next);
+    }
+    return currentNode;
+  }
+
   printList(): void {
     let current = this.head;
     if (current === null) {
@@ -69,7 +99,8 @@ class LinkedList<T> {
 const list = new LinkedList();
 list.push(2);
 list.push(3);
-// list.push(4);
-// list.push(5);
-list.pop();
+list.push(4);
+list.push(5);
+list.unshift(1);
 list.printList();
+console.log(list.get(6));
