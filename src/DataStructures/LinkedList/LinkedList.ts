@@ -83,6 +83,17 @@ class LinkedList<T> {
     return currentNode;
   }
 
+  set(index: number, value: T): ListNode<T> | false {
+    let node = this.get(index);
+
+    if (node) {
+      node.value = value;
+      return node;
+    } else {
+      return false;
+    }
+  }
+
   printList(): void {
     let current = this.head;
     if (current === null) {
@@ -103,4 +114,5 @@ list.push(4);
 list.push(5);
 list.unshift(1);
 list.printList();
-console.log(list.get(6));
+console.log(list.get(2));
+console.log(list.set(2, 7));
