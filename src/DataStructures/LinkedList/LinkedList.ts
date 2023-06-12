@@ -94,6 +94,25 @@ class LinkedList<T> {
     }
   }
 
+  insert(index: number, value: T): LinkedList<T> | null {
+    if (index < 0 || index > this.length) {
+      return null;
+    } else if (index === 0) {
+      this.unshift(value);
+    } else if (index === this.length) {
+      this.push(value);
+    } else {
+      let prevNode = this.get(index - 1);
+      if (prevNode) {
+        let newNode = new ListNode(value);
+        newNode.next = prevNode.next;
+        prevNode.next = newNode;
+        this.length++;
+      }
+    }
+    return this;
+  }
+
   printList(): void {
     let current = this.head;
     if (current === null) {
@@ -113,6 +132,7 @@ list.push(3);
 list.push(4);
 list.push(5);
 list.unshift(1);
-list.printList();
 console.log(list.get(2));
 console.log(list.set(2, 7));
+list.insert(5, 8);
+list.printList();
