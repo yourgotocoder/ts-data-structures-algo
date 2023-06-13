@@ -97,6 +97,44 @@ export class DoublyLinkedList<T> {
     return this;
   }
 
+  insert(index: number, value: T): DoublyLinkedList<T> | null {
+    if (index < 0 || index > this.length) return null;
+    if (index === 0) {
+      this.unshift(value);
+    } else if (index === this.length) {
+      this.push(value);
+    } else {
+      let beforeNode = this.get(index - 1);
+      let afterNode = beforeNode && beforeNode.next;
+      const node = new DoublyLinkedNode(value);
+      beforeNode && (beforeNode.next = node);
+      node.previous = beforeNode;
+      afterNode && (afterNode.previous = node);
+      node.next = afterNode;
+      this.length++;
+    }
+    return this;
+  }
+
+  remove(index: number): DoublyLinkedNode<T> | null {
+    if (index < 0 || index >= this.length) return null;
+    if (index === 0) {
+      return this.shift();
+    } else if (index === this.length - 1) {
+      return this.pop();
+    } else {
+      const node = this.get(index);
+      const beforeNode = node && node.previous;
+      const afterNode = node && node.next;
+      node && (node.next = null);
+      node && (node.previous = null);
+      beforeNode && (beforeNode.next = afterNode);
+      afterNode && (afterNode.previous = beforeNode);
+      this.length--;
+      return node;
+    }
+  }
+
   printList(): void {
     let current = this.head;
     if (!current) console.log("Empty list");
@@ -115,4 +153,6 @@ newList.push(2);
 newList.push(3);
 newList.push(4);
 newList.set(3, 5);
+console.log(newList.insert(1, 10));
+console.log(newList.remove(4));
 newList.printList();
