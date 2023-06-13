@@ -90,6 +90,13 @@ export class DoublyLinkedList<T> {
     }
   }
 
+  set(index: number, value: T): DoublyLinkedList<T> | null {
+    if (index < 0 || index >= this.length) return null;
+    const node = this.get(index);
+    node && (node.value = value);
+    return this;
+  }
+
   printList(): void {
     let current = this.head;
     if (!current) console.log("Empty list");
@@ -107,9 +114,5 @@ newList.push(1);
 newList.push(2);
 newList.push(3);
 newList.push(4);
-console.log(newList.get(0));
-console.log(newList.get(1));
-console.log(newList.get(2));
-console.log(newList.get(3));
-console.log(newList.get(4));
+newList.set(3, 5);
 newList.printList();
