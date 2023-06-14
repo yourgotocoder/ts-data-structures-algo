@@ -54,11 +54,14 @@ class Stack<T> {
 }
 
 const stack = new Stack();
-
+// 1 <- 2 <- 3 <- 4 <- 5
+//                        tail
 stack.add(1);
 stack.add(2);
 stack.add(3);
 stack.add(4);
 stack.add(5);
 stack.remove();
+// 1 <- 2 <- 3 <- 4
+//               tail
 stack.printStack();
