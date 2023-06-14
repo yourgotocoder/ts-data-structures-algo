@@ -23,7 +23,7 @@ class QueueNode<T> {
   }
 }
 
-class Queue<T> {
+export class Queue<T> {
   first: QueueNode<T> | null = null;
   last: QueueNode<T> | null = null;
   size: number = 0;

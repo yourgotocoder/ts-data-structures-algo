@@ -20,7 +20,7 @@ class StackNode<T> {
   }
 }
 
-class Stack<T> {
+export class Stack<T> {
   tail: StackNode<T> | null = null;
   size: number = 0;
 
