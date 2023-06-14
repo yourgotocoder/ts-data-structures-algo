@@ -135,6 +135,19 @@ export class DoublyLinkedList<T> {
     }
   }
 
+  reverse(): void {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let temp: DoublyLinkedNode<T> | null;
+    while (node) {
+      temp = node.next;
+      node.next = node.previous;
+      node.previous = temp;
+      node = temp;
+    }
+  }
+
   printList(): void {
     let current = this.head;
     if (!current) console.log("Empty list");
@@ -152,7 +165,5 @@ newList.push(1);
 newList.push(2);
 newList.push(3);
 newList.push(4);
-newList.set(3, 5);
-console.log(newList.insert(1, 10));
-console.log(newList.remove(4));
+newList.reverse();
 newList.printList();
