@@ -46,6 +46,7 @@ class Stack<T> {
   }
 
   printStack(): void {
+    if (!this.tail) console.log("Empty stack");
     while (this.tail) {
       console.log(this.tail.value);
       this.tail = this.tail.previous;
@@ -62,6 +63,9 @@ stack.add(3);
 stack.add(4);
 stack.add(5);
 stack.remove();
+stack.remove();
+stack.remove();
+stack.remove();
 // 1 <- 2 <- 3 <- 4
-//               tail
 stack.printStack();
+//               tail
