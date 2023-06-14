@@ -22,8 +22,9 @@ class StackNode<T> {
 
 class Stack<T> {
   tail: StackNode<T> | null = null;
+  size: number = 0;
 
-  add(val: T): void {
+  add(val: T): number {
     const node = new StackNode(val);
     if (!this.tail) {
       this.tail = node;
@@ -31,13 +32,17 @@ class Stack<T> {
       node.previous = this.tail;
       this.tail = node;
     }
+    this.size++;
+    return this.size;
   }
 
-  remove(): void {
-    if (!this.tail) return;
+  remove(): StackNode<T> | "Empty Stack" {
+    if (!this.tail) return "Empty Stack";
     const removedNode = this.tail;
     this.tail = removedNode.previous;
     removedNode.previous = null;
+    this.size--;
+    return removedNode;
   }
 
   printStack(): void {
