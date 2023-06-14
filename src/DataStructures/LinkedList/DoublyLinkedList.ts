@@ -139,7 +139,7 @@ export class DoublyLinkedList<T> {
     let node = this.head;
     this.head = this.tail;
     this.tail = node;
-    let temp: DoublyLinkedNode<T> | null;
+    let temp: DoublyLinkedNode<T> | null = null;
     while (node) {
       temp = node.next;
       node.next = node.previous;
