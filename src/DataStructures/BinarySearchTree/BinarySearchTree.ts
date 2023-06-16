@@ -27,21 +27,25 @@ export class BinarySearchTree<T> {
     return parent;
   }
 
-  insert(val: T): BinarySearchTreeNode<T> {
+  insert(val: T): BinarySearchTreeNode<T> | "Duplicate" {
     const newNode = new BinarySearchTreeNode(val);
     if (!this.root) {
       this.root = newNode;
     }
-    const nodeToBeInsertedAt = this.traverse(this.root, val);
-    if (val > nodeToBeInsertedAt.value) {
-      nodeToBeInsertedAt.right = newNode;
-      this.size++;
+    if (this.find(val) === "Not Found") {
+      const nodeToBeInsertedAt = this.traverse(this.root, val);
+      if (val > nodeToBeInsertedAt.value) {
+        nodeToBeInsertedAt.right = newNode;
+        this.size++;
+      }
+      if (val < nodeToBeInsertedAt.value) {
+        nodeToBeInsertedAt.left = newNode;
+        this.size++;
+      }
+      return newNode;
+    } else {
+      return "Duplicate";
     }
-    if (val < nodeToBeInsertedAt.value) {
-      nodeToBeInsertedAt.left = newNode;
-      this.size++;
-    }
-    return newNode;
   }
 
   find(
@@ -67,8 +71,7 @@ export class BinarySearchTree<T> {
 const bst = new BinarySearchTree<number>();
 
 for (let i = 0; i < 100000; i++) {
-  const randomNumber = Math.floor(Math.random() * 1000);
+  const randomNumber = Math.floor(Math.random() * 100);
   bst.insert(randomNumber);
-  bst.find(randomNumber) !== "Not Found" &&
-    console.log(randomNumber, bst.find(randomNumber));
 }
+console.log(bst);
