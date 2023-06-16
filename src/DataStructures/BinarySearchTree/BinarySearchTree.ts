@@ -16,12 +16,12 @@ export class BinarySearchTree<T> {
     if (val > parent.value) {
       if (parent.right !== null) {
         parent = parent.right;
-        this.traverse(parent, val);
+        return this.traverse(parent, val);
       }
     } else {
       if (parent.left !== null) {
         parent = parent.left;
-        this.traverse(parent, val);
+        return this.traverse(parent, val);
       }
     }
     return parent;
@@ -64,14 +64,11 @@ export class BinarySearchTree<T> {
     return "Not Found";
   }
 }
+const bst = new BinarySearchTree<number>();
 
-const tree = new BinarySearchTree();
-tree.insert(15);
-tree.insert(9);
-tree.insert(21);
-tree.insert(12);
-tree.insert(8);
-tree.insert(15);
-console.log(tree.find(8));
-console.log(tree.find(10));
-console.log(tree);
+for (let i = 0; i < 100000; i++) {
+  const randomNumber = Math.floor(Math.random() * 1000);
+  bst.insert(randomNumber);
+  bst.find(randomNumber) !== "Not Found" &&
+    console.log(randomNumber, bst.find(randomNumber));
+}
