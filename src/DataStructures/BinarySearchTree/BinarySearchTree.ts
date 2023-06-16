@@ -44,29 +44,24 @@ export class BinarySearchTree<T> {
     return newNode;
   }
 
-  find(val: T): BinarySearchTreeNode<T> | "Not Found" {
-    if (!this.root) return "Not Found";
-    let current = this.root;
-    while (true) {
-      if (val === current.value) {
-        return current;
-      } else {
-        if (val < current.value) {
-          if (current.left) {
-            current = current.left;
-          } else {
-            return "Not Found";
-          }
-        }
-        if (val > current.value) {
-          if (current.right) {
-            current = current.right;
-          } else {
-            return "Not Found";
-          }
-        }
-      }
+  find(
+    val: T,
+    parent: BinarySearchTreeNode<T> | null = this.root
+  ): BinarySearchTreeNode<T> | "Not Found" {
+    if (!parent) return "Not Found";
+    if (val === parent.value) return parent;
+    if (val < parent.value && !parent.left) return "Not Found";
+    if (val > parent.value && !parent.right) return "Not Found";
+
+    if (val < parent.value && parent.left) {
+      parent = parent.left;
+      return this.find(val, parent);
     }
+    if (val > parent.value && parent.right) {
+      parent = parent.right;
+      return this.find(val, parent);
+    }
+    return "Not Found";
   }
 }
 
