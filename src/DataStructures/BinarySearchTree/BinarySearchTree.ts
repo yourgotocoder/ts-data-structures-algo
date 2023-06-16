@@ -9,22 +9,22 @@ class BinarySearchTreeNode<T> {
 
 export class BinarySearchTree<T> {
   root: BinarySearchTreeNode<T> | null = null;
-
+  size: number = 0;
   constructor() {}
 
-  traverse(root: BinarySearchTreeNode<T>, val: T): BinarySearchTreeNode<T> {
-    if (val > root.value) {
-      if (root.right !== null) {
-        root = root.right;
-        this.traverse(root, val);
+  traverse(parent: BinarySearchTreeNode<T>, val: T): BinarySearchTreeNode<T> {
+    if (val > parent.value) {
+      if (parent.right !== null) {
+        parent = parent.right;
+        this.traverse(parent, val);
       }
     } else {
-      if (root.left !== null) {
-        root = root.left;
-        this.traverse(root, val);
+      if (parent.left !== null) {
+        parent = parent.left;
+        this.traverse(parent, val);
       }
     }
-    return root;
+    return parent;
   }
 
   insert(val: T): BinarySearchTreeNode<T> {
@@ -33,9 +33,40 @@ export class BinarySearchTree<T> {
       this.root = newNode;
     }
     const nodeToBeInsertedAt = this.traverse(this.root, val);
-    if (val > nodeToBeInsertedAt.value) nodeToBeInsertedAt.right = newNode;
-    if (val < nodeToBeInsertedAt.value) nodeToBeInsertedAt.left = newNode;
+    if (val > nodeToBeInsertedAt.value) {
+      nodeToBeInsertedAt.right = newNode;
+      this.size++;
+    }
+    if (val < nodeToBeInsertedAt.value) {
+      nodeToBeInsertedAt.left = newNode;
+      this.size++;
+    }
     return newNode;
+  }
+
+  find(val: T): BinarySearchTreeNode<T> | "Not Found" {
+    if (!this.root) return "Not Found";
+    let current = this.root;
+    while (true) {
+      if (val === current.value) {
+        return current;
+      } else {
+        if (val < current.value) {
+          if (current.left) {
+            current = current.left;
+          } else {
+            return "Not Found";
+          }
+        }
+        if (val > current.value) {
+          if (current.right) {
+            current = current.right;
+          } else {
+            return "Not Found";
+          }
+        }
+      }
+    }
   }
 }
 
@@ -45,4 +76,7 @@ tree.insert(9);
 tree.insert(21);
 tree.insert(12);
 tree.insert(8);
+tree.insert(15);
+console.log(tree.find(8));
+console.log(tree.find(10));
 console.log(tree);
