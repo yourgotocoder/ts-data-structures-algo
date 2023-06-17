@@ -103,6 +103,19 @@ export class BinarySearchTree<T> {
     helper(current);
     return store;
   }
+
+  DFSPostOrder(): T[] {
+    const store: T[] = [];
+    const current: BinarySearchTreeNode<T> | null = this.root;
+    const helper = (node: BinarySearchTreeNode<T> | null) => {
+      if (!node) return;
+      if (node.left) helper(node.left);
+      if (node.right) helper(node.right);
+      store.push(node.value);
+    };
+    helper(current);
+    return store;
+  }
 }
 const bst = new BinarySearchTree<number>();
 bst.insert(10);
@@ -116,3 +129,4 @@ bst.insert(20);
 //  3   8              20
 // console.log(bst.BFS());
 console.log(bst.DFSPreOrder());
+console.log(bst.DFSPostOrder());
