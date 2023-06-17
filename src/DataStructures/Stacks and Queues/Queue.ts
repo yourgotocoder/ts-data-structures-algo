@@ -28,7 +28,7 @@ export class Queue<T> {
   last: QueueNode<T> | null = null;
   size: number = 0;
 
-  add(value: T): Queue<T> {
+  enqueue(value: T): Queue<T> {
     const node = new QueueNode(value);
     if (!this.first) {
       this.first = node;
@@ -41,7 +41,7 @@ export class Queue<T> {
     return this;
   }
 
-  remove(): T | "Empty Stack" {
+  dequeue(): T | "Empty Stack" {
     if (!this.first) return "Empty Stack";
     const removedNode = this.first;
     this.first = this.first.next;

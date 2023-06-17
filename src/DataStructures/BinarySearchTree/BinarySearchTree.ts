@@ -73,14 +73,14 @@ export class BinarySearchTree<T> {
   BFS(): T[] {
     const store: T[] = [];
     const queue: Queue<BinarySearchTreeNode<T>> = new Queue();
-    if (this.root) queue.add(this.root);
+    if (this.root) queue.enqueue(this.root);
     while (queue.size > 0) {
-      const visited = queue.remove() as BinarySearchTreeNode<T>;
-      if (visited instanceof BinarySearchTreeNode && visited.left) {
-        queue.add(visited.left);
+      const visited = queue.dequeue() as BinarySearchTreeNode<T>;
+      if (visited.left) {
+        queue.enqueue(visited.left);
       }
-      if (visited instanceof BinarySearchTreeNode && visited.right) {
-        queue.add(visited.right);
+      if (visited.right) {
+        queue.enqueue(visited.right);
       }
       store.push(visited.value);
     }
@@ -88,12 +88,11 @@ export class BinarySearchTree<T> {
   }
 }
 const bst = new BinarySearchTree<number>();
-const values: number[] = [];
+bst.insert(10);
+bst.insert(6);
+bst.insert(15);
+bst.insert(3);
+bst.insert(8);
+bst.insert(20);
 
-for (let i = 0; i < 100000; i++) {
-  const randomNumber = Math.floor(Math.random() * 30);
-  bst.insert(randomNumber);
-  !values.includes(randomNumber) && values.push(randomNumber);
-}
-console.log(values);
 console.log(bst.BFS());
