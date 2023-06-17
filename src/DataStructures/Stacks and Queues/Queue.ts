@@ -41,13 +41,13 @@ export class Queue<T> {
     return this;
   }
 
-  remove(): QueueNode<T> | "Empty Stack" {
+  remove(): T | "Empty Stack" {
     if (!this.first) return "Empty Stack";
     const removedNode = this.first;
     this.first = this.first.next;
     removedNode.next = null;
     this.size--;
-    return removedNode;
+    return removedNode.value;
   }
 
   printQueue(): void {
@@ -58,12 +58,3 @@ export class Queue<T> {
     }
   }
 }
-
-const queue = new Queue();
-queue.add(1);
-queue.add(2);
-queue.add(3);
-queue.add(4);
-queue.add(5);
-console.log(queue.remove());
-queue.printQueue();

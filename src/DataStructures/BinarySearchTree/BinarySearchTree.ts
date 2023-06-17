@@ -1,3 +1,5 @@
+import { Queue } from "../Stacks and Queues/Queue";
+
 class BinarySearchTreeNode<T> {
   value: T;
   left: BinarySearchTreeNode<T> | null = null;
@@ -67,11 +69,31 @@ export class BinarySearchTree<T> {
     }
     return "Not Found";
   }
+
+  BFS(): T[] {
+    const store: T[] = [];
+    const queue: Queue<BinarySearchTreeNode<T>> = new Queue();
+    if (this.root) queue.add(this.root);
+    while (queue.size > 0) {
+      const visited = queue.remove() as BinarySearchTreeNode<T>;
+      if (visited instanceof BinarySearchTreeNode && visited.left) {
+        queue.add(visited.left);
+      }
+      if (visited instanceof BinarySearchTreeNode && visited.right) {
+        queue.add(visited.right);
+      }
+      store.push(visited.value);
+    }
+    return store;
+  }
 }
 const bst = new BinarySearchTree<number>();
+const values: number[] = [];
 
 for (let i = 0; i < 100000; i++) {
-  const randomNumber = Math.floor(Math.random() * 100);
+  const randomNumber = Math.floor(Math.random() * 30);
   bst.insert(randomNumber);
+  !values.includes(randomNumber) && values.push(randomNumber);
 }
-console.log(bst);
+console.log(values);
+console.log(bst.BFS());
