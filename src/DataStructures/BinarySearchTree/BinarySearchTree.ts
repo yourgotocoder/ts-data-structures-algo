@@ -86,6 +86,23 @@ export class BinarySearchTree<T> {
     }
     return store;
   }
+
+  DFSPreOrder(): T[] {
+    const store: T[] = [];
+    const current: BinarySearchTreeNode<T> | null = this.root;
+    const helper = (node: BinarySearchTreeNode<T> | null) => {
+      if (!node) return;
+      store.push(node.value);
+      if (node.left) {
+        helper(node.left);
+      }
+      if (node.right) {
+        helper(node.right);
+      }
+    };
+    helper(current);
+    return store;
+  }
 }
 const bst = new BinarySearchTree<number>();
 bst.insert(10);
@@ -94,5 +111,8 @@ bst.insert(15);
 bst.insert(3);
 bst.insert(8);
 bst.insert(20);
-
-console.log(bst.BFS());
+//        10
+//    6           15
+//  3   8              20
+// console.log(bst.BFS());
+console.log(bst.DFSPreOrder());
