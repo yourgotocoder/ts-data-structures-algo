@@ -3,29 +3,64 @@ class MaxBinaryHeap<T> {
 
   constructor() {}
 
+  swap(index1: number, index2: number) {
+    [this.values[index1], this.values[index2]] = [
+      this.values[index1],
+      this.values[index2],
+    ];
+  }
+
   insert(val: T): MaxBinaryHeap<T> {
     this.values.push(val);
     if (this.values.length > 1) {
-      let indexOfValue = this.values.length - 1;
-      const getParentIndex = (index: number) => {
+      let indexOfVal = this.values.length - 1;
+      const getParentIndex = (index: number): number => {
         return Math.floor((index - 1) / 2);
       };
-      let parentIndex: number = getParentIndex(indexOfValue);
-      const swap = (index1: number, index2: number) =>
-        ([this.values[index1], this.values[index2]] = [
-          this.values[index2],
-          this.values[index1],
-        ]);
+      let parentIndex: number = getParentIndex(indexOfVal);
       while (
-        this.values[indexOfValue] > this.values[parentIndex] &&
-        indexOfValue !== 0
+        this.values[indexOfVal] > this.values[parentIndex] &&
+        indexOfVal !== 0
       ) {
-        swap(indexOfValue, parentIndex);
-        indexOfValue = parentIndex;
-        parentIndex = getParentIndex(indexOfValue);
+        this.swap(indexOfVal, parentIndex);
+        indexOfVal = parentIndex;
+        parentIndex = getParentIndex(indexOfVal);
       }
     }
     return this;
+  }
+
+  extractMax(): T | null {
+    if (this.values.length === 0) return null;
+    if (this.values.length === 1) return this.values[0];
+
+    this.swap(0, this.values.length - 1);
+    const extractedValue = this.values.pop();
+    let currentIndexOfLastElement = 0;
+    let child1Index = 2 * currentIndexOfLastElement + 1;
+    let child2Index = 2 * currentIndexOfLastElement + 2;
+    let indexToSwap: number;
+    while (this.values[child1Index] || this.values[child2Index]) {
+      if (this.values[child1Index] && this.values[child2Index]) {
+        this.values[child1Index] > this.values[child2Index]
+          ? (indexToSwap = child1Index)
+          : (indexToSwap = child2Index);
+      } else if (!this.values[child1Index]) {
+        indexToSwap = child2Index;
+      } else {
+        indexToSwap = child1Index;
+      }
+
+      if (this.values[indexToSwap] > this.values[currentIndexOfLastElement]) {
+        this.swap(indexToSwap, currentIndexOfLastElement);
+        currentIndexOfLastElement = indexToSwap;
+        child1Index = 2 * currentIndexOfLastElement + 1;
+        child2Index = 2 * currentIndexOfLastElement + 2;
+      } else {
+        break;
+      }
+    }
+    return extractedValue as T;
   }
 }
 
@@ -37,4 +72,5 @@ maxHeap.insert(18);
 maxHeap.insert(27);
 maxHeap.insert(12);
 maxHeap.insert(55);
+console.log(maxHeap.extractMax());
 console.log(maxHeap.values);
