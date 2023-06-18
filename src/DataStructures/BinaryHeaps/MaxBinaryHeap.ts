@@ -1,9 +1,9 @@
-class MaxBinaryHeap<T> {
+export default class MaxBinaryHeap<T> {
   values: T[] = [];
 
   constructor() {}
 
-  swap(index1: number, index2: number) {
+  private swap(index1: number, index2: number) {
     [this.values[index1], this.values[index2]] = [
       this.values[index2],
       this.values[index1],
@@ -37,25 +37,25 @@ class MaxBinaryHeap<T> {
     this.swap(0, this.values.length - 1);
     const extractedValue = this.values.pop();
     let currentIndexOfLastElement = 0;
-    let child1Index = 2 * currentIndexOfLastElement + 1;
-    let child2Index = 2 * currentIndexOfLastElement + 2;
+    let leftChildIndex = 2 * currentIndexOfLastElement + 1;
+    let rightChildIndex = 2 * currentIndexOfLastElement + 2;
     let indexToSwap: number;
-    while (this.values[child1Index] || this.values[child2Index]) {
-      if (this.values[child1Index] && this.values[child2Index]) {
-        this.values[child1Index] > this.values[child2Index]
-          ? (indexToSwap = child1Index)
-          : (indexToSwap = child2Index);
-      } else if (!this.values[child1Index]) {
-        indexToSwap = child2Index;
+    while (this.values[leftChildIndex] || this.values[rightChildIndex]) {
+      if (this.values[leftChildIndex] && this.values[rightChildIndex]) {
+        this.values[leftChildIndex] > this.values[rightChildIndex]
+          ? (indexToSwap = leftChildIndex)
+          : (indexToSwap = rightChildIndex);
+      } else if (!this.values[leftChildIndex]) {
+        indexToSwap = rightChildIndex;
       } else {
-        indexToSwap = child1Index;
+        indexToSwap = leftChildIndex;
       }
 
       if (this.values[indexToSwap] > this.values[currentIndexOfLastElement]) {
         this.swap(indexToSwap, currentIndexOfLastElement);
         currentIndexOfLastElement = indexToSwap;
-        child1Index = 2 * currentIndexOfLastElement + 1;
-        child2Index = 2 * currentIndexOfLastElement + 2;
+        leftChildIndex = 2 * currentIndexOfLastElement + 1;
+        rightChildIndex = 2 * currentIndexOfLastElement + 2;
       } else {
         break;
       }
@@ -72,6 +72,7 @@ maxHeap.insert(18);
 maxHeap.insert(27);
 maxHeap.insert(12);
 maxHeap.insert(55);
+maxHeap.insert(39);
 console.log(maxHeap.values);
 console.log(maxHeap.extractMax());
 console.log(maxHeap.values);
