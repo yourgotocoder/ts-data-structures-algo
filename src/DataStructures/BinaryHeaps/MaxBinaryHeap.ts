@@ -32,7 +32,7 @@ class MaxBinaryHeap<T> {
 
   extractMax(): T | null {
     if (this.values.length === 0) return null;
-    if (this.values.length === 1) return this.values[0];
+    if (this.values.length === 1) return this.values.pop() as T;
 
     this.swap(0, this.values.length - 1);
     const extractedValue = this.values.pop();
