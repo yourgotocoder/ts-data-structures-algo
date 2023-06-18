@@ -5,8 +5,8 @@ class MaxBinaryHeap<T> {
 
   swap(index1: number, index2: number) {
     [this.values[index1], this.values[index2]] = [
-      this.values[index1],
       this.values[index2],
+      this.values[index1],
     ];
   }
 
@@ -72,5 +72,6 @@ maxHeap.insert(18);
 maxHeap.insert(27);
 maxHeap.insert(12);
 maxHeap.insert(55);
+console.log(maxHeap.values);
 console.log(maxHeap.extractMax());
 console.log(maxHeap.values);
