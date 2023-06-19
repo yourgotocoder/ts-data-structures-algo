@@ -17,13 +17,12 @@ class HashTable<T> {
   }
   set(key: string, value: T): void {
     if (!this.store[this.hash(key)]) this.store[this.hash(key)] = [];
+    let innerStore = this.store[this.hash(key)];
     if (this.get(key)) {
-      const indexOfInnerStore = this.store[this.hash(key)].findIndex(
-        (item) => item[0] === key
-      );
-      this.store[this.hash(key)][indexOfInnerStore][1] = value;
+      const indexOfInnerStore = innerStore.findIndex((item) => item[0] === key);
+      innerStore[indexOfInnerStore][1] = value;
     } else {
-      this.store[this.hash(key)].push([key, value]);
+      innerStore.push([key, value]);
     }
   }
   get(key: string): [string, T] | null {
