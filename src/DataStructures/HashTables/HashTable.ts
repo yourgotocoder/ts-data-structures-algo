@@ -1,8 +1,8 @@
 class HashTable<T> {
-  store: T[];
+  store: [string, T][][];
   size: number;
   constructor(size: number) {
-    this.store = new Array<T>(size);
+    this.store = new Array<[string, T][]>(size);
     this.size = size;
   }
 
@@ -15,18 +15,20 @@ class HashTable<T> {
     }
     return total;
   }
-  add(key: string, value: T): void {
-    this.store[this.hash(key)] = value;
+  set(key: string, value: T): void {
+    if (!this.store[this.hash(key)]) this.store[this.hash(key)] = [];
+    this.store[this.hash(key)].push([key, value]);
   }
-  get(key: string): T | null {
-    return this.store[this.hash(key)] || null;
-  }
+  // get(key: string): T | null {
+  //   return this.store[this.hash(key)] || null;
+  // }
 }
 
 const table = new HashTable(100);
 
-table.add("key", 1);
-table.add("zion", "zie");
+table.set("key", 1);
+table.set("zion", "zie");
 
-console.log(table.get("key"));
-console.log(table.get("zion"));
+// console.log(table.get("key"));
+// console.log(table.get("zion"));
+console.log(table.store);
