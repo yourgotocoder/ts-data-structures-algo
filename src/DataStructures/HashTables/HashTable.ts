@@ -19,9 +19,17 @@ class HashTable<T> {
     if (!this.store[this.hash(key)]) this.store[this.hash(key)] = [];
     this.store[this.hash(key)].push([key, value]);
   }
-  // get(key: string): T | null {
-  //   return this.store[this.hash(key)] || null;
-  // }
+  get(key: string): T | null {
+    if (this.store[this.hash(key)]) {
+      const innerStore = this.store[this.hash(key)];
+      for (let item of innerStore) {
+        if (item[0] === key) return item[1];
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
 }
 
 const table = new HashTable(100);
@@ -29,6 +37,6 @@ const table = new HashTable(100);
 table.set("key", 1);
 table.set("zion", "zie");
 
-// console.log(table.get("key"));
-// console.log(table.get("zion"));
-console.log(table.store);
+console.log(table.get("key"));
+console.log(table.get("zion"));
+console.log(table.get("false"));
