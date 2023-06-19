@@ -7,13 +7,13 @@ class HashTable<T> {
   }
 
   hash(key: string): number {
-    let total = 0;
+    let hashIndex = 0;
     const prime = 31;
     for (let i = 0; i < Math.min(key.length, 100); i++) {
       let char = key[i];
-      total = (total * prime + (char.charCodeAt(0) - 96)) % this.size;
+      hashIndex = (hashIndex * prime + (char.charCodeAt(0) - 96)) % this.size;
     }
-    return total;
+    return hashIndex;
   }
   set(key: string, value: T): void {
     if (!this.store[this.hash(key)]) this.store[this.hash(key)] = [];
@@ -36,14 +36,39 @@ class HashTable<T> {
       return null;
     }
   }
+
+  keys(): string[] {
+    const keys: string[] = [];
+    for (let innerStore of this.store) {
+      if (innerStore) {
+        for (let item of innerStore) {
+          keys.push(item[0]);
+        }
+      }
+    }
+    return keys;
+  }
+
+  values(): T[] {
+    const values: T[] = [];
+    for (let innerStore of this.store) {
+      if (innerStore) {
+        for (let item of innerStore) {
+          values.push(item[1]);
+        }
+      }
+    }
+    return values;
+  }
 }
 
 const table = new HashTable(100);
 
 table.set("key", 1);
 table.set("zion", "zie");
-table.set("zion", "na");
 console.log(table.get("key"));
 
 console.log(table.get("zion"));
 console.log(table.get("false"));
+console.log(table.keys());
+console.log(table.values());
