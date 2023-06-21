@@ -38,14 +38,38 @@ class Graph {
     }
     delete this.adjacencyList[v];
   }
+
+  DFSRecursive(v: string): string[] {
+    const result: string[] = [];
+    const visited: { [key: string]: boolean } = {};
+    const helper = (vertex: string) => {
+      if (!vertex) return;
+      visited[vertex] = true;
+      result.push(vertex);
+      for (let val of this.adjacencyList[vertex]) {
+        if (!visited[val]) {
+          helper(val);
+        }
+      }
+    };
+    helper(v);
+    return result;
+  }
 }
 
 const graph = new Graph();
 
-graph.addVertex("Tokyo");
-graph.addVertex("Osaka");
-graph.addVertex("Kyoto");
-graph.addEdge("Tokyo", "Osaka");
-graph.addEdge("Tokyo", "Kyoto");
-graph.removeVertex("Tokyo");
-console.log(graph.adjacencyList);
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+graph.addEdge("A", "B");
+graph.addEdge("A", "C");
+graph.addEdge("B", "D");
+graph.addEdge("C", "E");
+graph.addEdge("D", "E");
+graph.addEdge("D", "F");
+graph.addEdge("E", "F");
+console.log(graph.DFSRecursive("A"));
