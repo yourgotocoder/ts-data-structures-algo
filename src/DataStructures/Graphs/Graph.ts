@@ -39,7 +39,7 @@ class Graph {
     delete this.adjacencyList[v];
   }
 
-  DFSRecursive(v: string): string[] {
+  DFRecursive(v: string): string[] {
     const result: string[] = [];
     const visited: { [key: string]: boolean } = {};
     const helper = (vertex: string) => {
