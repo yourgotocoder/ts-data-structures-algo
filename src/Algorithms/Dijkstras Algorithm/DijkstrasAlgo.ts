@@ -54,7 +54,7 @@ function Dijkstra(
       }
       break;
     }
-    if (smallestVertex || distances[smallestVertex] !== Infinity) {
+    if (smallestVertex) {
       for (let neighbour in Graph.adjacencyList[smallestVertex]) {
         let nextNode = Graph.adjacencyList[smallestVertex][neighbour];
         let candidate = distances[smallestVertex] + nextNode.weight;
@@ -70,4 +70,4 @@ function Dijkstra(
   return [[...path, start].reverse(), distances[end]];
 }
 
-console.log(Dijkstra(graph, "A", "E"));
+console.log(Dijkstra(graph, "A", "B"));
