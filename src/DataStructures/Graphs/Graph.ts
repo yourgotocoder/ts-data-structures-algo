@@ -1,3 +1,6 @@
+import { Queue } from "../Stacks and Queues/Queue";
+import { Stack } from "../Stacks and Queues/Stack";
+
 interface VertexList {
   [key: string]: string[];
 }
@@ -43,16 +46,48 @@ class Graph {
     const result: string[] = [];
     const visited: { [key: string]: boolean } = {};
     const helper = (vertex: string) => {
-      if (!vertex) return;
+      if (visited[vertex]) return;
       visited[vertex] = true;
       result.push(vertex);
-      for (let val of this.adjacencyList[vertex]) {
-        if (!visited[val]) {
-          helper(val);
-        }
+      for (let neighbour of this.adjacencyList[vertex]) {
+        helper(neighbour);
       }
     };
     helper(v);
+    return result;
+  }
+  DFIterative(start: string): string[] {
+    const result: string[] = [];
+    const visited: { [key: string]: true } = {};
+    const stack: string[] = [];
+    stack.push(start);
+    while (stack.length > 0) {
+      let vertex = stack.pop() as string;
+      if (!visited[vertex]) {
+        result.push(vertex);
+        visited[vertex] = true;
+        for (let neighbour of this.adjacencyList[vertex]) {
+          stack.push(neighbour);
+        }
+      }
+    }
+    return result;
+  }
+  BFTraversal(start: string): string[] {
+    const result: string[] = [];
+    const visited: { [key: string]: true } = {};
+    const queue: Queue<string> = new Queue();
+    queue.enqueue(start);
+    while (queue.size) {
+      const vertex = queue.dequeue();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        this.adjacencyList[vertex].forEach((neighbour) =>
+          queue.enqueue(neighbour)
+        );
+      }
+    }
     return result;
   }
 }
@@ -72,4 +107,6 @@ graph.addEdge("C", "E");
 graph.addEdge("D", "E");
 graph.addEdge("D", "F");
 graph.addEdge("E", "F");
-console.log(graph.DFSRecursive("A"));
+// console.log(graph.DFRecursive("A"));
+// console.log(graph.DFIterative("A"));
+console.log(graph.BFTraversal("A"));

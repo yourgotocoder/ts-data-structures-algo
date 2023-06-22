@@ -36,13 +36,13 @@ export class Stack<T> {
     return this.size;
   }
 
-  remove(): StackNode<T> | "Empty Stack" {
+  remove(): T | "Empty Stack" {
     if (!this.tail) return "Empty Stack";
     const removedNode = this.tail;
     this.tail = removedNode.previous;
     removedNode.previous = null;
     this.size--;
-    return removedNode;
+    return removedNode.value;
   }
 
   printStack(): void {
