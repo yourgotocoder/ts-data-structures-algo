@@ -31,6 +31,9 @@ function Dijkstra(
   end: string
 ): [string[], number] {
   const priorityQueue: PriorityQueue<string> = new PriorityQueue();
+  /**
+   * @property Stores distance from the start for every vertex
+   */
   const distances: { [key: string]: number } = {};
   const previous: { [key: string]: string | null } = {};
   const path: string[] = [];
