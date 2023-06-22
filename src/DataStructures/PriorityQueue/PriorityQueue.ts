@@ -50,9 +50,9 @@ export default class PriorityQueue<T> {
         this.values[rightNodeIndex] && this.values[rightNodeIndex].priority;
       let indexToBeSwapped: number;
       if (leftPriority && rightPriority) {
-        leftPriority > rightPriority
-          ? (indexToBeSwapped = rightPriority)
-          : (indexToBeSwapped = leftPriority);
+        leftPriority >= rightPriority
+          ? (indexToBeSwapped = rightNodeIndex)
+          : (indexToBeSwapped = leftNodeIndex);
       } else if (!leftPriority) {
         indexToBeSwapped = rightNodeIndex;
       } else {
