@@ -12,21 +12,21 @@ export default class PriorityQueue<T> {
   enqueue(value: T, priority: number): PriorityQueue<T> {
     this.values.push(new PriorityQueueNode(value, priority));
     if (this.values.length > 1) {
-      let indexOfNode = this.values.length - 1;
+      let indexOfNewNode = this.values.length - 1;
       const getParentIndex = (index: number): number => {
         return Math.floor((index - 1) / 2);
       };
-      let parentIndex: number = getParentIndex(indexOfNode);
+      let parentIndex: number = getParentIndex(indexOfNewNode);
       while (
-        indexOfNode !== 0 &&
-        this.values[indexOfNode].priority < this.values[parentIndex].priority
+        indexOfNewNode !== 0 &&
+        this.values[indexOfNewNode].priority < this.values[parentIndex].priority
       ) {
-        [this.values[indexOfNode], this.values[parentIndex]] = [
+        [this.values[indexOfNewNode], this.values[parentIndex]] = [
           this.values[parentIndex],
-          this.values[indexOfNode],
+          this.values[indexOfNewNode],
         ];
-        indexOfNode = parentIndex;
-        parentIndex = getParentIndex(indexOfNode);
+        indexOfNewNode = parentIndex;
+        parentIndex = getParentIndex(indexOfNewNode);
       }
     }
     return this;
@@ -77,15 +77,3 @@ export default class PriorityQueue<T> {
     return minValue;
   }
 }
-
-const priorityQueue = new PriorityQueue();
-priorityQueue.enqueue("headache", 2);
-priorityQueue.enqueue("fracture", 1);
-priorityQueue.enqueue("fever", 3);
-priorityQueue.enqueue("stabbed", 0);
-console.log(priorityQueue.values);
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
-console.log(priorityQueue.dequeue());
