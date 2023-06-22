@@ -33,7 +33,7 @@ function Dijkstra(
   const priorityQueue: PriorityQueue<string> = new PriorityQueue();
   const distances: { [key: string]: number } = {};
   const previous: { [key: string]: string | null } = {};
-
+  const path: string[] = [];
   for (let key in Graph.adjacencyList) {
     key === start ? (distances[key] = 0) : (distances[key] = Infinity);
     key === start
@@ -42,19 +42,29 @@ function Dijkstra(
     previous[key] = null;
   }
 
-  console.log(priorityQueue.values);
   while (priorityQueue.values.length) {
-    const smallestVertex = priorityQueue.dequeue() as string;
+    let smallestVertex = priorityQueue.dequeue() as string;
     if (smallestVertex === end) {
+      while (previous[smallestVertex]) {
+        path.push(smallestVertex);
+        smallestVertex = previous[smallestVertex]!;
+      }
       break;
     }
     if (smallestVertex || distances[smallestVertex] !== Infinity) {
       for (let neighbour in Graph.adjacencyList[smallestVertex]) {
-        console.log(neighbour);
+        let nextNode = Graph.adjacencyList[smallestVertex][neighbour];
+        let candidate = distances[smallestVertex] + nextNode.weight;
+        let nextNeighbour = nextNode.node;
+        if (candidate < distances[nextNeighbour]) {
+          distances[nextNeighbour] = candidate;
+          previous[nextNeighbour] = smallestVertex;
+          priorityQueue.enqueue(nextNeighbour, candidate);
+        }
       }
     }
   }
-  return [[], 0];
+  return [[...path, start].reverse(), distances[end]];
 }
 
-Dijkstra(graph, "A", "B");
+console.log(Dijkstra(graph, "A", "E"));
