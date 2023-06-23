@@ -24,6 +24,7 @@ export function merge(arr1: number[], arr2: number[]): number[] {
 }
 /**
  * Takes an unsorted array of numbers and returns a sorted array using merge sort technique
+ * For example: mergeSort([4, 8, 1, 3, 6]) will return [1, 3, 4, 6, 8]
  * @param arr - An array of of unsorted numbers
  */
 export function mergeSort(arr: number[]): number[] {
