@@ -152,6 +152,21 @@ class LinkedList<T> {
         prevHead && (prevHead.next = null);
         this.tail = prevHead;
       }
+    } else if (degree < 0) {
+      let current = this.head;
+      let preTail: ListNode<T> | null = current;
+      for (
+        let i = 0;
+        i < Math.abs(this.length - Math.abs(degree)) % this.length;
+        i++
+      ) {
+        preTail = current;
+        current = current && current.next;
+      }
+      this.tail && (this.tail.next = this.head);
+      this.head = preTail && preTail.next;
+      preTail && (preTail.next = null);
+      this.tail = preTail;
     }
   }
   printList(): void {
@@ -174,5 +189,5 @@ list.push(3);
 list.push(4);
 list.push(5);
 list.printList();
-list.rotate(3);
+list.rotate(-2);
 list.printList();
