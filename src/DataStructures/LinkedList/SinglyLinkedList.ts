@@ -145,7 +145,11 @@ class LinkedList<T> {
 
   rotate(degree: number): void {
     if (degree > 0) {
-      for (let currentDegree = 0; currentDegree < degree; currentDegree++) {
+      for (
+        let currentDegree = 0;
+        currentDegree < degree % this.length;
+        currentDegree++
+      ) {
         let prevHead = this.head;
         this.tail && (this.tail.next = prevHead);
         this.head = prevHead && prevHead.next;
@@ -189,5 +193,5 @@ list.push(3);
 list.push(4);
 list.push(5);
 list.printList();
-list.rotate(-2);
+list.rotate(0);
 list.printList();
