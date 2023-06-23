@@ -22,7 +22,10 @@ export function merge(arr1: number[], arr2: number[]): number[] {
 
   return newArray;
 }
-
+/**
+ * Takes an unsorted array of numbers and returns a sorted array using merge sort technique
+ * @param arr - An array of of unsorted numbers
+ */
 export function mergeSort(arr: number[]): number[] {
   if (arr.length <= 1) return arr;
   let middle = Math.floor(arr.length / 2);
