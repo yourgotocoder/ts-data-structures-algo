@@ -24,13 +24,13 @@ export function merge(arr1: number[], arr2: number[]): number[] {
 }
 /**
  * Takes an unsorted array of numbers and returns a sorted array using merge sort technique
- * For example: mergeSort([4, 8, 1, 3, 6]) will return [1, 3, 4, 6, 8]
+ * For example: MergeSort([4, 8, 1, 3, 6]) will return [1, 3, 4, 6, 8]
  * @param arr - An array of of unsorted numbers
  */
-export function mergeSort(arr: number[]): number[] {
+export function MergeSort(arr: number[]): number[] {
   if (arr.length <= 1) return arr;
   let middle = Math.floor(arr.length / 2);
-  let left = mergeSort(arr.slice(0, middle));
-  let right = mergeSort(arr.slice(middle));
+  let left = MergeSort(arr.slice(0, middle));
+  let right = MergeSort(arr.slice(middle));
   return merge(left, right);
 }
