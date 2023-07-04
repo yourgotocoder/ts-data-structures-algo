@@ -7,7 +7,7 @@ class TrieNode {
     this.isEndOfWord = false;
   }
 }
-export class Trie {
+export default class Trie {
   root: TrieNode;
 
   constructor() {
