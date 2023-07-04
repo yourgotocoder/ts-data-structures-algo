@@ -1,3 +1,16 @@
+class TrieNode {
+  children: { [key: string]: TrieNode };
+  isEndOfWord: boolean;
+
+  constructor() {
+    this.children = {};
+    this.isEndOfWord = false;
+  }
+}
 export class Trie {
-  trie: { [key: string]: {} } = {};
+  root: TrieNode;
+
+  constructor() {
+    this.root = new TrieNode();
+  }
 }
