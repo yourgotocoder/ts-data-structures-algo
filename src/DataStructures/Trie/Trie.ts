@@ -14,7 +14,7 @@ export class Trie {
     this.root = new TrieNode();
   }
 
-  insert(word: string) {
+  insert(word: string): void {
     let currentNode = this.root;
     for (let char of word) {
       if (!currentNode.children[char]) {
@@ -23,5 +23,14 @@ export class Trie {
       currentNode = currentNode.children[char];
     }
     currentNode.isEndOfWord = true;
+  }
+
+  search(word: string): boolean {
+    let currentNode = this.root;
+    for (let char of word) {
+      if (!currentNode.children[char]) return false;
+      currentNode = currentNode.children[char];
+    }
+    return currentNode.isEndOfWord;
   }
 }
