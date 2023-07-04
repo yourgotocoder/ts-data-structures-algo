@@ -13,4 +13,15 @@ export class Trie {
   constructor() {
     this.root = new TrieNode();
   }
+
+  insert(word: string) {
+    let currentNode = this.root;
+    for (let char of word) {
+      if (!currentNode.children[char]) {
+        currentNode.children[char] = new TrieNode();
+      }
+      currentNode = currentNode.children[char];
+    }
+    currentNode.isEndOfWord = true;
+  }
 }
