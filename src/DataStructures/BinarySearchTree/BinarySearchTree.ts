@@ -12,7 +12,7 @@ class BinarySearchTreeNode<T> {
 export class BinarySearchTree<T> {
   root: BinarySearchTreeNode<T> | null = null;
   size: number = 0;
-  constructor() {}
+  constructor() { }
 
   traverse(parent: BinarySearchTreeNode<T>, val: T): BinarySearchTreeNode<T> {
     if (val > parent.value) {
@@ -56,8 +56,6 @@ export class BinarySearchTree<T> {
   ): BinarySearchTreeNode<T> | "Not Found" {
     if (!parent) return "Not Found";
     if (val === parent.value) return parent;
-    if (val < parent.value && !parent.left) return "Not Found";
-    if (val > parent.value && !parent.right) return "Not Found";
 
     if (val < parent.value && parent.left) {
       parent = parent.left;
@@ -134,6 +132,7 @@ bst.insert(15);
 bst.insert(3);
 bst.insert(8);
 bst.insert(20);
+console.log(bst.find(14));
 //        10
 //    6           15
 //  3   8              20
